@@ -8,7 +8,7 @@ import '../styles/index.css'
 // width: 7200 height: 5400
 // credit: https://www.gtabase.com/red-dead-redemption-2/locations/red-dead-redemption-2-map-full-official-world-map-of-rdr2-in-hd
 
-const bounds = [[0, 0], [2000, 2000]]
+const bounds = [[0, 0], [2100, 3600]]
 
 const IndexPage = () => (
   <div>
@@ -21,7 +21,12 @@ class MainMap extends React.Component {
     if (typeof window !== 'undefined') {
       return (
         <Map id="mapid" crs={L.CRS.Simple} minZoom={-2} bounds={bounds}>
-          <ImageOverlay minZoom={-2} bounds={bounds} url={RDRMapFull} />
+          <ImageOverlay
+            minZoom={-2}
+            bounds={bounds}
+            maxBounds={bounds}
+            url={RDRMapFull}
+          />
         </Map>
       )
     }
