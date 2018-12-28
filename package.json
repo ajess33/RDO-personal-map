@@ -12,6 +12,7 @@
     "gatsby-plugin-react-helmet": "^3.0.2",
     "gatsby-plugin-react-leaflet": "^2.0.3",
     "gatsby-plugin-sharp": "^2.0.14",
+    "gatsby-plugin-typography": "^2.2.4",
     "gatsby-source-filesystem": "^2.0.8",
     "gatsby-transformer-sharp": "^2.1.8",
     "leaflet": "^1.3.4",
@@ -19,7 +20,10 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-helmet": "^5.2.0",
-    "react-leaflet": "^2.1.4"
+    "react-leaflet": "^2.1.4",
+    "react-typography": "^0.16.18",
+    "typeface-alegreya": "^0.0.69",
+    "typography": "^0.16.18"
   },
   "keywords": [
     "gatsby"

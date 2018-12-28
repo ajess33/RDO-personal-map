@@ -12,6 +12,7 @@ const bounds = [[-400, -600], [2400, 3800]]
 
 const IndexPage = () => (
   <div>
+    <h1 className="title">RDO CUSTOM MAP</h1>
     <MainMap />
   </div>
 )
@@ -19,6 +20,7 @@ const IndexPage = () => (
 class MainMap extends React.Component {
   state = {
     markers: [],
+    // setDesc: false,
   }
 
   addMarker = e => {
@@ -27,31 +29,51 @@ class MainMap extends React.Component {
     this.setState({ markers })
   }
 
+  addDesc = () => {
+    this.setState({ setDesc: true })
+  }
+
   render() {
     if (typeof window !== 'undefined') {
       return (
-        <Map
-          id="mapid"
-          crs={L.CRS.Simple}
-          minZoom={-2}
-          onClick={this.addMarker}
-          bounds={bounds}
-        >
-          <ImageOverlay bounds={bounds} maxBounds={bounds} url={RDRMapFull} />
-          {this.state.markers.map((position, idx) => (
-            <Marker key={`marker-${idx}`} position={position}>
-              <Popup>
-                <span>
-                  A pretty CSS3 popup. <br /> Easily customizable.
-                </span>
-              </Popup>
-            </Marker>
-          ))}
-        </Map>
+        <div>
+          <Map
+            id="mapid"
+            crs={L.CRS.Simple}
+            minZoom={-2}
+            onClick={this.addMarker}
+            bounds={bounds}
+          >
+            <ImageOverlay bounds={bounds} maxBounds={bounds} url={RDRMapFull} />
+            {this.state.markers.map((position, idx) => (
+              <Marker key={`marker-${idx}`} position={position}>
+                <Popup>
+                  <span>Description will go here</span>
+                  <button>Delete</button>
+                </Popup>
+              </Marker>
+            ))}
+          </Map>
+        </div>
       )
     }
     return null
   }
 }
+// <MarkerList markers={this.state.markers} />
+
+// class MarkerList extends React.Component {
+//   render() {
+//     return (
+//       <div>
+//         <ul>
+//           {markers.map((marker, index) => {
+//             return <li key={index}>{marker}</li>
+//           })}
+//         </ul>
+//       </div>
+//     )
+//   }
+// }
 
 export default IndexPage
