@@ -1,13 +1,22 @@
 import React from 'react'
-import { Map, ImageOverlay, Marker, Popup } from 'react-leaflet'
+import {
+  Map,
+  ImageOverlay,
+  Marker,
+  Popup,
+  LayersControl,
+  LayerGroup,
+} from 'react-leaflet'
 import L from 'leaflet'
 import RDRMap from '../images/rdr2-map.png'
 import RDRMapFull from '../images/rdr2-map-full.png'
 import '../styles/index.css'
+// import { HideoutsOverlay } from '../components/layers'
 
 // width: 7200 height: 5400
 // credit: https://www.gtabase.com/red-dead-redemption-2/locations/red-dead-redemption-2-map-full-official-world-map-of-rdr2-in-hd
 
+const { Overlay } = LayersControl
 const bounds = [[-400, -600], [2400, 3800]]
 
 const IndexPage = () => (
@@ -20,17 +29,14 @@ const IndexPage = () => (
 class MainMap extends React.Component {
   state = {
     markers: [],
-    // setDesc: false,
   }
 
   addMarker = e => {
     const { markers } = this.state
     markers.push(e.latlng)
-    this.setState({ markers })
-  }
+    console.log(e)
 
-  addDesc = () => {
-    this.setState({ setDesc: true })
+    this.setState({ markers })
   }
 
   render() {
@@ -44,15 +50,112 @@ class MainMap extends React.Component {
             onClick={this.addMarker}
             bounds={bounds}
           >
-            <ImageOverlay bounds={bounds} maxBounds={bounds} url={RDRMapFull} />
-            {this.state.markers.map((position, idx) => (
-              <Marker key={`marker-${idx}`} position={position}>
-                <Popup>
-                  <span>Description will go here</span>
-                  <button>Delete</button>
-                </Popup>
-              </Marker>
-            ))}
+            <LayersControl position="topright">
+              <ImageOverlay
+                bounds={bounds}
+                maxBounds={bounds}
+                url={RDRMapFull}
+              />
+              <Overlay name="Gang Hideouts">
+                <LayerGroup>
+                  <Marker position={[1961, 3322]}>
+                    <Popup>Willard's Rest</Popup>
+                  </Marker>
+                  <Marker position={[1886, 2927]}>
+                    <Popup>The Loft</Popup>
+                  </Marker>
+                  <Marker position={[1810, 2406]}>
+                    <Popup>Bacchus Station</Popup>
+                  </Marker>
+                  <Marker position={[1580, 2276]}>
+                    <Popup>Firewood Rise</Popup>
+                  </Marker>
+                  <Marker position={[1658, 2176]}>
+                    <Popup>Six Point Cabin</Popup>
+                  </Marker>
+                  <Marker position={[2038, 1696]}>
+                    <Popup>Colter</Popup>
+                  </Marker>
+                  <Marker position={[1690, 1485]}>
+                    <Popup>Ewing Basin</Popup>
+                  </Marker>
+                  <Marker position={[1493, 1370]}>
+                    <Popup>Hanging Dog Ranch</Popup>
+                  </Marker>
+                  <Marker position={[1404, 1811]}>
+                    <Popup>Cumberland Falls</Popup>
+                  </Marker>
+                  <Marker position={[1355, 3123]}>
+                    <Popup>???</Popup>
+                  </Marker>
+                  <Marker position={[1251, 3110]}>
+                    <Popup>???</Popup>
+                  </Marker>
+                  <Marker position={[1019, 3056]}>
+                    <Popup>Lakay</Popup>
+                  </Marker>
+                  <Marker position={[664, 2914]}>
+                    <Popup>Shady Bell</Popup>
+                  </Marker>
+                  <Marker position={[872, 2514]}>
+                    <Popup>Radley's Pasture</Popup>
+                  </Marker>
+                  <Marker position={[970, 1605]}>
+                    <Popup>Fort Riggs</Popup>
+                  </Marker>
+                  <Marker position={[634, 1753]}>
+                    <Popup>Quakers Cove</Popup>
+                  </Marker>
+                  <Marker position={[650, 1436]}>
+                    <Popup>Bear Claw</Popup>
+                  </Marker>
+                  <Marker position={[372, 1594]}>
+                    <Popup>Manteca Falls</Popup>
+                  </Marker>
+                  <Marker position={[511, 1183]}>
+                    <Popup>Pike's Basin</Popup>
+                  </Marker>
+                  <Marker position={[587, 701]}>
+                    <Popup>Twin Rocks - Ultimate Edition</Popup>
+                  </Marker>
+                  <Marker position={[552, 534]}>
+                    <Popup>Rattlesnake Hollow</Popup>
+                  </Marker>
+                  <Marker position={[387, 730]}>
+                    <Popup>Jorge's Gap</Popup>
+                  </Marker>
+                  <Marker position={[167, 620]}>
+                    <Popup>Fort Mercer</Popup>
+                  </Marker>
+                  <Marker position={[212, 450]}>
+                    <Popup>Repentance</Popup>
+                  </Marker>
+                  <Marker position={[101, 160]}>
+                    <Popup>Soloman's Folly</Popup>
+                  </Marker>
+                  <Marker position={[392, 0.85]}>
+                    <Popup>Cueva Seca</Popup>
+                  </Marker>
+                  <Marker position={[233, -56]}>
+                    <Popup>Gaptooth Breach</Popup>
+                  </Marker>
+                  <Marker position={[137, -145]}>
+                    <Popup>Sea of Coronado</Popup>
+                  </Marker>
+                  <Marker position={[1026, 2819]}>
+                    <Popup>???</Popup>
+                  </Marker>
+                </LayerGroup>
+              </Overlay>
+              {this.state.markers.map((position, idx) => (
+                <Marker key={`marker-${idx}`} position={position}>
+                  <Popup>
+                    <span>Description will go here</span>
+                    <button>Delete</button>
+                  </Popup>
+                </Marker>
+              ))}
+            </LayersControl>
           </Map>
         </div>
       )
@@ -60,20 +163,5 @@ class MainMap extends React.Component {
     return null
   }
 }
-// <MarkerList markers={this.state.markers} />
-
-// class MarkerList extends React.Component {
-//   render() {
-//     return (
-//       <div>
-//         <ul>
-//           {markers.map((marker, index) => {
-//             return <li key={index}>{marker}</li>
-//           })}
-//         </ul>
-//       </div>
-//     )
-//   }
-// }
 
 export default IndexPage
