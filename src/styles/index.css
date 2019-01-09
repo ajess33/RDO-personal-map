@@ -8,6 +8,14 @@ body {
   margin: 80px auto;
 }
 
+h2 {
+  max-width: 35rem;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1.7rem;
+  color: #eaecee;
+}
+
 .title {
   text-align: center;
   font-size: 74px;
@@ -15,4 +23,5 @@ body {
   letter-spacing: 1.5;
   font-family: 'Alegreya', serif;
   font-weight: 800;
+  padding-top: 30px;
 }

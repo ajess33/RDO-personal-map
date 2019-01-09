@@ -6,14 +6,13 @@ import {
   Popup,
   LayersControl,
   LayerGroup,
+  Circle,
 } from 'react-leaflet'
 import L from 'leaflet'
-import RDRMap from '../images/rdr2-map.png'
 import RDRMapFull from '../images/rdr2-map-full.png'
 import '../styles/index.css'
 // import { HideoutsOverlay } from '../components/layers'
 
-// width: 7200 height: 5400
 // credit: https://www.gtabase.com/red-dead-redemption-2/locations/red-dead-redemption-2-map-full-official-world-map-of-rdr2-in-hd
 
 const { Overlay } = LayersControl
@@ -22,7 +21,15 @@ const bounds = [[-400, -600], [2400, 3800]]
 const IndexPage = () => (
   <div>
     <h1 className="title">RDO CUSTOM MAP</h1>
+    <h2>
+      Interactive map for Red Dead Online. Browse various pre-set markers or
+      create your own!
+    </h2>
     <MainMap />
+    <p>
+      Map credit:
+      https://www.gtabase.com/red-dead-redemption-2/locations/red-dead-redemption-2-map-full-official-world-map-of-rdr2-in-hd
+    </p>
   </div>
 )
 
@@ -37,6 +44,10 @@ class MainMap extends React.Component {
     console.log(e)
 
     this.setState({ markers })
+  }
+
+  deleteMarker = e => {
+    console.log(e)
   }
 
   render() {
@@ -147,11 +158,31 @@ class MainMap extends React.Component {
                   </Marker>
                 </LayerGroup>
               </Overlay>
+              <Overlay name="Fishing Locations">
+                <LayerGroup>
+                  <Circle center={[1300, 1800]} fill-color="blue" radius={100}>
+                    <Popup>Sockeye Salmon</Popup>
+                  </Circle>
+                  <Circle center={[1200, 2100]} fill-color="blue" radius={100}>
+                    <Popup>Steelhead Trout</Popup>
+                  </Circle>
+                </LayerGroup>
+              </Overlay>
+              <Overlay name="Best Hunting Location">
+                <LayerGroup>
+                  <Circle center={[1031, 3212]} fill-color="red" radius={200}>
+                    <Popup>
+                      Heron, Whooping Crane, Spoonbill Plume, Alligators (best
+                      money making method){' '}
+                    </Popup>
+                  </Circle>
+                </LayerGroup>
+              </Overlay>
               {this.state.markers.map((position, idx) => (
                 <Marker key={`marker-${idx}`} position={position}>
                   <Popup>
                     <span>Description will go here</span>
-                    <button>Delete</button>
+                    <button onClick={this.deleteMarker}>Delete</button>
                   </Popup>
                 </Marker>
               ))}
